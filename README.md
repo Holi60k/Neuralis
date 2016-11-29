@@ -1,0 +1,2 @@
+# Neuralis
+Neurális háló beadandó
