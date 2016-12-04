@@ -40,13 +40,3 @@ t = table(
 )
 print(t)
 cat("accuracy:" , 100 * sum(diag(t)) /sum(t),"%\n",sep="")
-
-
-
-res = predict(net,data[-selected,],type="class")
-t = table(
-  y = res,
-  d=data[-selected,]$d
-)
-print(t)
-cat("accuracy:" , 100 * sum(diag(t)) /sum(t),"%\n",sep="")

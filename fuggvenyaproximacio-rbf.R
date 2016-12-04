@@ -1,3 +1,7 @@
+# A feladat a sin(x) függvény közelítése a [-pi/2,*pi] intervallumon, kettõ féle módszerrel.
+# A következõ pár sor kód a függvény közelítését mutatja be svm használatával.
+# Megpróbálom helyesen közelíteni a függvényt a megadott intervallumon.
+
 library(RSNNS)
 
 f<-function(x){ sin(x) }
@@ -24,4 +28,4 @@ lines(x,fitted(rbfnet),col="green",lwd=2,lty="dashed")     # 1. halozat kozelite
 rbfnet2 <- rbf(x,y, size=3,initFuncParams=c(0, 1, 0, 0.25, 0.04))     
 lines(x,fitted(rbfnet2),col="red",lwd=2,lty="dotdash")     # 2. halozat kozelitese 
 
-title(main="RBF networks for regression")
+title(main="RBF")

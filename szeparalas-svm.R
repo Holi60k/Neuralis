@@ -1,5 +1,5 @@
 #Feladat: Szeparálás végzése valamelyik tanult módszerrel.
-#A következő szeparálás az neuralnet segítségével történik.
+#A következő szeparálás az svm segítségével történik.
 #Osztályba sorolás
 library(neuralnet)
 library(nnet)
@@ -13,14 +13,26 @@ names(data) = c("d","RW","RD","LW","LD")
 data=transform(data,d=factor(d))
 #Kiválasztunk az adatokból az adathalmaz számosságának a felét
 selected = sample(1:nrow(data),nrow(data)*0.5)
-trainData <- cbind(data[, 2:5], class.ind(data$d))
-trainData
-#Létrehozzuk a hálózatot, 10 darab rejtett réteggel
-net = neuralnet(L + B + R ~ RW + LW + LD + RD, trainData)
-#Előállítunk egy eredmény vektort ami az adatplé választ ki elemeket a selected vektor indexeivel.
-res = compute(net,trainData[,1:4])
 
-#Kontingencia táblázat készítése
+
+library(e1071)
+
+#Nem jól szeparál, elsőfokú
+m <- svm(d ~ ., data=data, kernel="polynomial", degree=1, scale=FALSE)
+print(m)
+
+t <- table(y=predict(m), d=data$d)
+
 print(t)
 
-cat("accuracy:" , 100 * sum(diag(t)) /sum(t),"%\n",sep="")
+cat("Accuracy: ", 100 * sum(diag(t)) / sum(t), "%\n", sep="")
+
+#100%-osan szeparál, harmadfokú
+m <- svm(d ~ ., data=data, kernel="polynomial", degree=3, scale=FALSE)
+print(m)
+
+t <- table(y=predict(m), d=data$d)
+
+print(t)
+
+cat("Accuracy: ", 100 * sum(diag(t)) / sum(t), "%\n", sep="")

@@ -31,7 +31,7 @@ yt <- predict(m, xt)
 lines(xt,yt,col="blue",lty="dashed",lwd=2)
 
 #Második hálózat gamma=20 értékkel
-m <- svm(x, y, kernel="radial", gamma=6, scale=F)
+m <- svm(x, y, kernel="radial", gamma=20, scale=F)
 print(m)
 
 yt <- predict(m, xt)
